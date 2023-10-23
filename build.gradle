@@ -27,12 +27,8 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	// mysql
-	//implementation 'mysql:mysql-connector-java'
-	//
 	implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
   	//implementation 'javax.servlet:jstl'
-	//
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'com.mysql:mysql-connector-j'
 	annotationProcessor 'org.projectlombok:lombok'
