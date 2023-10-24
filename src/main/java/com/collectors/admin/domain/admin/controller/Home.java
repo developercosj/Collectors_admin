@@ -6,11 +6,27 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class Home {
 
-    @GetMapping("/login")
+    // thymeleaf
+    @GetMapping("/main")
     public String loginTest () {
-        System.out.println("test success"); 
+        System.out.println("test success");
+        return "thymeleaf/index3";
 
-        return "/login"; 
+    }
+
+    // jsp
+    @GetMapping("/jsptest")
+    public String jspTest () {
+        System.out.println("test success jsp");
+        return "test";
+
+    }
+
+    // jsp
+    @GetMapping("/login")
+    public String loginController () {
+        System.out.println("test success login jsp");
+        return "login";
 
     }
     
