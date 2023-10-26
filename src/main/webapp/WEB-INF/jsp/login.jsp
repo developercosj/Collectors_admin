@@ -35,10 +35,7 @@
                             <div class="brand-logo">
                                 <img src="resources/template/collectors_image/collectors_logo.svg" alt="logo">
                             </div>
-                            <h4>안녕하세요</h4>
-                            <h4>hello</h4>
-                            <h4>안녕하세요</h4>
-                            <h6 class="fw-light">Collectors 어드민 회원가입</h6>
+                            <h2 class="fw-light">Collectors 어드민 로그인</h2>
                             <form class="pt-3">
                                 <div class="form-group">
                                     <input type="email" class="form-control form-control-lg" id="exampleInputEmail1"
@@ -58,7 +55,7 @@
                                     <a class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn"
                                         href="../../index.html">로그인</a>
                                     <a class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn"
-                                        href="../../register.html">회원가입</a>
+                                        href="/register.do">회원가입</a>
                                 </div>
 
                 

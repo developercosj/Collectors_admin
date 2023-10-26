@@ -17,16 +17,21 @@ public class Home {
     // jsp
     @GetMapping("/jsptest")
     public String jspTest () {
-        System.out.println("test success jsp");
         return "test";
 
     }
 
-    // jsp
+    // 로그인 페이지 이동
     @GetMapping("/login")
-    public String loginController () {
-        System.out.println("test success login jsp");
+    public String login () {
         return "login";
+
+    }
+
+    // 회원가입 페이지 이동
+    @GetMapping("/register.do")
+    public String register () {
+        return "register";
 
     }
     
