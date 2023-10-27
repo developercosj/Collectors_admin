@@ -38,9 +38,9 @@
                         <h2 class="fw-light">Collectors 어드민 회원가입</h2>
                         <form class="pt-3">
                             <div class="form-group">
-                                <input type="email" class="form-control form-control-lg" id="inputEmail"
+                                <input type="email" class="form-control form-control-lg" id="emailAddress"
                                        placeholder="이메일 : abc@collectors.co.kr">
-                                <input type="button" onclick="" value="이메일 인증">
+                                <input type="button" onclick="emailAuth()" value="이메일 인증">
                             </div>
                             <div class="form-group">
                                 <input type="password" class="form-control form-control-lg"
@@ -60,10 +60,6 @@
                                 <option value="">마케팅</option>
                                 <option value="">개발</option>
                             </select>
-
-
-
-
 
                             <div class="form-check">
                                 <label class="form-check-label text-muted">
@@ -106,14 +102,35 @@
 <script src="resources/template/collectors_js/template.js"></script>
 <script src="resources/template/collectors_js/settings.js"></script>
 <script src="resources/template/collectors_js/todolist.js"></script>
+<script src="resources/template/collectors_js/jquery.cookie.js"></script>
 <!-- endinject -->
-
+<%--<script src="resources/template/collectors_common/common.js"></script>--%>
 
 
 </body>
 
+
 <script>
 
+function emailAuth() {
+    var data = {"emailAddress" : $('#emailAddress').val()
+    };
+    $.ajax({
+        type : "POST",
+        url : "/emailAuth",
+        contentType: "application/json; charset=UTF-8",
+        dataType: "json",
+        data : JSON.stringify(data),
+        success : function (data, status) {
+            alert("success");
+        },
+        error : function (status) {
+            alert(status + "error!");
+        }
+    });
+
+
+}
 
 </script>
 
