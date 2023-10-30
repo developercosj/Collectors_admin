@@ -40,7 +40,11 @@
                             <div class="form-group">
                                 <input type="email" class="form-control form-control-lg" id="emailAddress"
                                        placeholder="이메일 : abc@collectors.co.kr">
-                                <input type="button" onclick="emailAuth()" value="이메일 인증">
+                                <div class="mt-3" >
+                                    <input type="button" class="btn btn-warning dropdown-toggle" id="authCodeButton" onclick="emailAuth()" value="인증번호 전송">
+                                    <input type="button" class="btn btn-warning dropdown-toggle"  id="confirmCodeButton" style="display:none; float: right;" onclick="emailConfirm()" value="인증완료">
+                                </div>
+
                             </div>
                             <div class="form-group">
                                 <input type="password" class="form-control form-control-lg"
@@ -122,7 +126,12 @@ function emailAuth() {
         dataType: "json",
         data : JSON.stringify(data),
         success : function (data, status) {
-            alert("success");
+            /*alert(data.message);*/
+
+            $("#authCodeButton").hide();
+            $("#confirmCodeButton").show();
+            $("#confirmCodeButton").before("<input type='text' class='form-control' placeholder='이메일에 전송된 인증번호를 입력해주세요'>");
+
         },
         error : function (status) {
             alert(status + "error!");
