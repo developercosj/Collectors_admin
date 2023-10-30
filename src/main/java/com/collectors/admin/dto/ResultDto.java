@@ -21,11 +21,13 @@ public class ResultDto<T> {
         this.resultData = null;
     }
 
-    public static<T> ResultDto<T> res(final HttpStatus statusCode, final String resultMsg) {
+    // 제네릭 메소드
+    public static <T> ResultDto<T> res(final HttpStatus statusCode, final String resultMsg) {
         return res(statusCode, resultMsg, null);
     }
 
-    public static<T> ResultDto<T> res(final HttpStatus statusCode, final String resultMsg, final T t){
+    // 빌더 패턴
+    public static <T> ResultDto<T> res(final HttpStatus statusCode, final String resultMsg, final T t){
         return ResultDto.<T>builder()
                 .resultData(t)
                 .statusCode(statusCode)
