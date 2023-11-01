@@ -21,6 +21,7 @@
     <!-- End plugin css for this page -->
     <!-- inject:css -->
     <link rel="stylesheet" href="resources/template/collectors_css/style.css">
+    <link rel="stylesheet" href="resources/template/collectors_css/style-detail.css">
     <!-- endinject -->
     <link rel="shortcut icon" href="resources/template/collectors_image/favicon.png" />
 </head>
@@ -41,8 +42,8 @@
                                 <input type="email" class="form-control form-control-lg" id="emailAddress"
                                        placeholder="이메일 : abc@collectors.co.kr">
                                 <div class="mt-3" >
-                                    <input type="button" class="btn btn-warning dropdown-toggle" id="authCodeButton" onclick="emailAuth()" value="인증번호 전송">
-                                    <input type="button" class="btn btn-warning dropdown-toggle"  id="confirmCodeButton" style="display:none; float: right;" onclick="emailConfirm()" value="인증완료">
+                                    <input type="button" class="btn btn-warning dropdown-toggle" id="authCodeButton" onclick="emailAddressCheck()" value="인증번호 전송">
+                                    <input type="button" class="btn btn-warning dropdown-toggle"  id="confirmCodeButton" onclick="emailConfirm()" value="인증완료">
                                 </div>
 
                             </div>
@@ -116,12 +117,14 @@
 
 <script>
 
+
+// 회원가입시 이메일 인증번호 전송
 function emailAuth() {
     var data = {"emailAddress" : $('#emailAddress').val()
     };
     $.ajax({
         type : "POST",
-        url : "/emailAuth",
+        url : "/sendEmailCode",
         contentType: "application/json; charset=UTF-8",
         dataType: "json",
         data : JSON.stringify(data),
@@ -130,8 +133,52 @@ function emailAuth() {
 
             $("#authCodeButton").hide();
             $("#confirmCodeButton").show();
-            $("#confirmCodeButton").before("<input type='text' class='form-control' placeholder='이메일에 전송된 인증번호를 입력해주세요'>");
+            $("#confirmCodeButton").before("<input type='text' id='emailCode' class='form-control' placeholder='인증번호 입력'>");
 
+        },
+        error : function (status) {
+            alert(status + "error!");
+        }
+    });
+}
+
+// 이메일 정규표현식 확인
+function emailAddressCheck() {
+    let regex = new RegExp('[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]+\.[a-zA-Z]{2,3}$');
+    let address = $('#emailAddress').val();
+    if (address == '') {
+        alert("이메일을 입력해 주세요");
+    }
+    let testEmails = regex.test(address);
+    console.log(testEmails);
+
+    if (testEmails == false) {
+        alert("올바른 이메일 형식으로 작성해주세요");
+    } else if (testEmails == true) {
+        emailAuth();
+    }
+}
+
+
+// 이메일 인증 인증번호 확인
+function emailConfirm() {
+    let code = $('#emailCode').val();
+    let address = $('#emailAddress').val();
+    var data = {"pass" : code,
+                "email" : address
+    };
+    if (code == '') {
+        alert("이메일 코드를 입력해 주세요");
+    }
+
+    $.ajax({
+        type : "POST",
+        url : "/confirmEmailCode",
+        contentType: "application/json; charset=UTF-8",
+        dataType: "json",
+        data : JSON.stringify(data),
+        success : function (data, status) {
+            alert(data.message);
         },
         error : function (status) {
             alert(status + "error!");
@@ -139,7 +186,11 @@ function emailAuth() {
     });
 
 
+
 }
+
+
+
 
 </script>
 

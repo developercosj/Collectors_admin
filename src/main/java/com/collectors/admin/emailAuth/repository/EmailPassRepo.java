@@ -17,6 +17,16 @@ public class EmailPassRepo {
         return result;
     }
 
+    public Long confirmEmailCode(EmailPassEntity emailPassEntity){
+        // 이메일 인증번호 확인
+        String pass = emailPassEntity.getPass();
+        String email = emailPassEntity.getEmail();
+
+        Long result = emailPassJpaRepo.countByPassAndEmail(pass, email);
+        System.out.println("result = " + result);
+        return result;
+    }
+
 
 
 
