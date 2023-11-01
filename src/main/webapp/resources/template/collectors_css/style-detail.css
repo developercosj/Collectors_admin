@@ -1,0 +1,13 @@
+#emailCode {
+    width: 200px;
+    font-size: 20px;
+    display: inline;
+    font-size: .9375rem;
+}
+
+
+#confirmCodeButton {
+    display: none;
+    float: right;
+}
+
