@@ -1,34 +1,35 @@
 package com.collectors.admin.emailAuth.service;
-import com.collectors.admin.emailAuth.repository.EmailPassRepo;
+import com.collectors.admin.emailAuth.repository.EmailRepo;
 import com.collectors.admin.entity.EmailPassEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
-import java.util.Optional;
 
 @Service
-public class EmailPassService {
+public class EmailService {
 
     @Autowired
-    EmailPassRepo emailPassRepo;
+    EmailRepo emailRepo;
 
+    // 회원가입시 이메일 인증코드 DB 저장
     public EmailPassEntity insertEmailPass(Map<String, Object> map){
 
         EmailPassEntity emailPassEntity = new EmailPassEntity();
         emailPassEntity.setPass(map.get("pass").toString());
         emailPassEntity.setEmail(map.get("emailAddress").toString());
 
-        return  emailPassRepo.insertEmailPass(emailPassEntity);
+        return  emailRepo.insertEmailPass(emailPassEntity);
     }
 
+    // 회원가입시 이메일 인증코드 DB 확인
     public Boolean confirmEmailCode(Map<String, Object> map){
 
         EmailPassEntity emailPassEntity = new EmailPassEntity();
         emailPassEntity.setPass(map.get("pass").toString());
         emailPassEntity.setEmail(map.get("email").toString());
 
-        Long countPassL = emailPassRepo.confirmEmailCode(emailPassEntity);
+        Long countPassL = emailRepo.confirmEmailCode(emailPassEntity);
         //int checkPass = Long.valueOf(Optional.ofNullable(countPassL).orElse(0L)).intValue();
 
         if (1 <= countPassL) {
@@ -37,4 +38,17 @@ public class EmailPassService {
         }
         return  false;
     }
+
+    // 회원가입 시 이메일 중복 확인
+    public Boolean checkUniqueEmail(Map<String, Object> map){
+
+        Long uniqueEmail = emailRepo.checkUniqueEmail(map.get("email").toString());
+
+        if (0 < uniqueEmail) {
+            //
+            return false;
+        }
+        return  true;
+    }
+
 }

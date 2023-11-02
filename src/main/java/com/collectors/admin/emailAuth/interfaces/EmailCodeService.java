@@ -1,5 +1,5 @@
 package com.collectors.admin.emailAuth.interfaces;
 
-public interface EmailService {
+public interface EmailCodeService {
     String sendSimpleMessage(String to) throws Exception;
 }

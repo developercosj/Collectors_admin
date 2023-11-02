@@ -9,7 +9,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 @ToString
 @Builder
 @AllArgsConstructor
-@Entity(name = "EmailPass" )
+@Entity(name = "email_pass" )
 public class EmailPassEntity {
 
 

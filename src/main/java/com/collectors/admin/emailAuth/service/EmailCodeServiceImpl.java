@@ -1,12 +1,13 @@
 package com.collectors.admin.emailAuth.service;
 
 import java.util.Random;
-import com.collectors.admin.emailAuth.interfaces.EmailService;
+
+import com.collectors.admin.emailAuth.interfaces.EmailCodeService;
 import jakarta.mail.Message;
 import jakarta.mail.internet.InternetAddress;
 import jakarta.mail.internet.MimeMessage;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+//import org.apache.logging.log4j.LogManager;
+//import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -14,9 +15,9 @@ import org.springframework.stereotype.Service;
 
 
 @Service
-public class EmailServiceImpl implements EmailService {
+public class EmailCodeServiceImpl implements EmailCodeService {
 
-    private final Logger logger = LogManager.getLogger(EmailServiceImpl.class);
+    // private final Logger logger = LogManager.getLogger(EmailServiceImpl.class);
 
     @Autowired
     JavaMailSender emailSender;
@@ -36,8 +37,8 @@ public class EmailServiceImpl implements EmailService {
     }
 
     private MimeMessage createMessage(String to)throws Exception{
-        logger.debug("보내는 대상 : " + to);
-        logger.debug("인증 번호 : " + ePw );
+        // logger.debug("보내는 대상 : " + to);
+        // logger.debug("인증 번호 : " + ePw );
         MimeMessage  message = emailSender.createMimeMessage();
 
         // To

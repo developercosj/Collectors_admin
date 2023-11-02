@@ -1,15 +1,22 @@
 package com.collectors.admin.emailAuth.repository;
 
-import com.collectors.admin.emailAuth.interfaces.EmailPassJpaRepo;
 import com.collectors.admin.entity.EmailPassEntity;
+import com.collectors.admin.jpaRepo.AdminJpaRepo;
+import com.collectors.admin.jpaRepo.EmailPassJpaRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class EmailPassRepo {
+public class EmailRepo {
 
     @Autowired
     EmailPassJpaRepo emailPassJpaRepo;
+
+    @Autowired
+    AdminJpaRepo adminJpaRepo;
+
+
+
     public EmailPassEntity insertEmailPass(EmailPassEntity emailPassEntity){
         // 비밀번호 저장
         EmailPassEntity result = emailPassJpaRepo.save(emailPassEntity);
@@ -26,6 +33,12 @@ public class EmailPassRepo {
         System.out.println("result = " + result);
         return result;
     }
+
+    public Long checkUniqueEmail(String email){
+        Long result = adminJpaRepo.countByAdmId(email);
+        return result;
+    }
+
 
 
 

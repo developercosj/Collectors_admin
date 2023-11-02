@@ -39,8 +39,8 @@
                         <h2 class="fw-light">Collectors 어드민 회원가입</h2>
                         <form class="pt-3">
                             <div class="form-group">
-                                <input type="email" class="form-control form-control-lg" id="emailAddress"
-                                       placeholder="이메일 : abc@collectors.co.kr">
+
+                                <input type="text" class="form-control form-control-lg" id="emailAddress" placeholder="이메일 : abc@collectors.co.kr">
                                 <div class="mt-3" >
                                     <input type="button" class="btn btn-warning dropdown-toggle" id="authCodeButton" onclick="emailAddressCheck()" value="인증번호 전송">
                                     <input type="button" class="btn btn-warning dropdown-toggle"  id="confirmCodeButton" onclick="emailConfirm()" value="인증완료">
@@ -129,11 +129,10 @@ function emailAuth() {
         dataType: "json",
         data : JSON.stringify(data),
         success : function (data, status) {
-            /*alert(data.message);*/
 
             $("#authCodeButton").hide();
             $("#confirmCodeButton").show();
-            $("#confirmCodeButton").before("<input type='text' id='emailCode' class='form-control' placeholder='인증번호 입력'>");
+            $("#confirmCodeButton").before('<input type="text" id="emailCode" class="form-control" placeholder="인증번호 입력">');
 
         },
         error : function (status) {
@@ -179,6 +178,10 @@ function emailConfirm() {
         data : JSON.stringify(data),
         success : function (data, status) {
             alert(data.message);
+            $('#confirmCodeButton').hide();
+            $('#emailCode').hide();
+            $("#emailAddress" ).prop('readonly', true);
+            $("#emailAddress").after('<a class="checkIcon" style="float: right;"></a>');
         },
         error : function (status) {
             alert(status + "error!");
