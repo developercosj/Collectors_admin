@@ -13,8 +13,8 @@ import lombok.ToString;
 @ToString
 @Builder
 @AllArgsConstructor
-@Entity(name = "adm_team" )
-public class AdminTeamEntity {
+@Entity(name = "adm_dept" )
+public class AdmDeptEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,7 +25,7 @@ public class AdminTeamEntity {
     int teamDirector;
 
 
-    public AdminTeamEntity() {
+    public AdmDeptEntity() {
 
     }
 }

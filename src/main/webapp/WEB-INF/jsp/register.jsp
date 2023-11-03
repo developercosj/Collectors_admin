@@ -57,15 +57,12 @@
                             </div>
                             <div class="form-group">
                                 <input type="text" class="form-control form-control-lg"
-                                       id="inputPhoneNo" placeholder="휴대폰번호">
+                                       id="inputPhoneNo" placeholder="휴대폰번호" oninput="phoneForm()">
                             </div>
                          <%--   부서--%>
-                            <label for="department">부서</label>
-                            <select name="department" id="department">
-                                <option value="">마케팅</option>
-                                <option value="">개발</option>
-                            </select>
+                            <div class="form-group" id="deptDiv">
 
+                            </div>
                             <div class="form-check">
                                 <label class="form-check-label text-muted">
                                     <input type="checkbox" class="form-check-input">
@@ -116,6 +113,33 @@
 
 
 <script>
+$(document).ready(function() {
+    console.log("ready!");
+
+    // 팀부서 관련 리스트 조회
+    $.ajax({
+        type : "GET",
+        url : "/selectDeptList",
+        contentType: "application/json; charset=UTF-8",
+        dataType: "json",
+        success : function (data, status) {
+            console.log(data);
+            var html = '';
+            html += '<label htmlFor="department" style="display:block;">부서</label>';
+            html += '<select name="department" id="department">';
+            for (var i = 0; i < data.length; i++) {
+                html += '<option value="'+ data[i].idx +'">' + data[i].teamName + '</option>';
+            }
+            html += '</select>'
+            $('#deptDiv').html(html);
+            
+
+        },
+        error : function (status) {
+            alert(status + "error!");
+        }
+    });
+});
 
 
 // 회원가입시 이메일 인증번호 전송
