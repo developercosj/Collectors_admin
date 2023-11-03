@@ -11,3 +11,14 @@
     float: right;
 }
 
+.checkIcon {
+    width: 16px;
+    height: 8px;
+    border: 2px solid darkblue;
+    border-top:0;
+    border-right:0;
+    margin-bottom: 4px;
+    transform: rotate(-45deg);
+    transform-origin: 25% 25%;
+
+}

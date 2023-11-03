@@ -216,6 +216,20 @@ function emailConfirm() {
 
 }
 
+// 휴대폰 번호 - 하이픈 추가
+
+function phoneForm() {
+    let phone = $('#inputPhoneNo').val();
+    //phone = '01012345678';
+    // 0-9 숫자가 아닐시 공백으로 전환해줌
+    phone = phone.replace(/[^0-9]/, '')
+    phone = phone.replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`);
+    console.log(phone);
+    $('#inputPhoneNo').val(phone);
+}
+
+
+
 
 
 
