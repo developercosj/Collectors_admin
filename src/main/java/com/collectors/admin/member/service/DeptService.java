@@ -1,6 +1,6 @@
-package com.collectors.admin.dept.service;
+package com.collectors.admin.member.service;
 
-import com.collectors.admin.dept.repository.DeptRepo;
+import com.collectors.admin.member.repository.DeptRepo;
 import com.collectors.admin.entity.AdmDeptEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

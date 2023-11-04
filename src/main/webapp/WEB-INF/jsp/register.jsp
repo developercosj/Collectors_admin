@@ -37,9 +37,9 @@
                             <img src="resources/template/collectors_image/collectors_logo.svg" alt="logo">
                         </div>
                         <h2 class="fw-light">Collectors 어드민 회원가입</h2>
-                        <form class="pt-3">
+                        <form action="./signInAdmin" name="signInForm" method="post" class="pt-3" >
                             <div class="form-group">
-                                <input type="text" class="form-control form-control-lg" id="emailAddress" placeholder="이메일 : abc@collectors.co.kr">
+                                <input type="text" class="form-control form-control-lg" id="emailAddress" name="email" placeholder="이메일 : abc@collectors.co.kr">
                                 <div class="mt-3" >
                                     <input type="button" class="btn btn-warning dropdown-toggle" id="authCodeButton" onclick="checkEmailAddress()" value="인증번호 전송">
                                     <input type="button" class="btn btn-warning dropdown-toggle"  id="confirmCodeButton" onclick="confirmEmail()" value="인증완료">
@@ -47,17 +47,17 @@
 
                             </div>
                             <div class="form-group">
-                                <input type="password" class="form-control form-control-lg"
-                                       id="inputPassword" placeholder="비밀번호" oninput="checkPassword()">
+                                <input type="password" class="form-control form-control-lg" id="inputPassword" name="pass" placeholder="비밀번호" oninput="checkPassword()">
                                 <span id="passInfo"></span>
                             </div>
                             <div class="form-group">
                                 <input type="text" class="form-control form-control-lg"
-                                       id="inputName" placeholder="이름">
+                                       id="inputName" name="name" placeholder="이름">
                             </div>
                             <div class="form-group">
                                 <input type="text" class="form-control form-control-lg"
                                        id="inputPhoneNo" placeholder="휴대폰번호" oninput="phoneForm()">
+                                <input type="hidden" value="" name="phone"  id="phoneNo">
                             </div>
                          <%--   부서--%>
                             <div class="form-group" id="deptDiv">
@@ -65,7 +65,7 @@
                             </div>
                             <div class="form-check">
                                 <label class="form-check-label text-muted">
-                                    <input type="checkbox" class="form-check-input">
+                                    <input type="checkbox" id="termsCheck" class="form-check-input">
                                     약관 동의
                                 </label>
                             </div>
@@ -240,6 +240,29 @@ function checkPassword() {
         $('#passInfo').text('사용 가능한 비밀번호 입니다.');
         $('#passInfo').attr("style", "float: right")
     }
+
+}
+
+// 회원가입 최종 버튼 클릭
+
+function signIn() {
+    // 약관 체크 검사
+    if ($('#termsCheck').is(':checked') == false) {
+        alert('약관에 동의해주세요');
+        return false;
+    }
+    // 휴대폰 번호 숫자만 추출
+
+    let phone = $('#inputPhoneNo').val();
+    //phone = '01012345678';
+    // 0-9 숫자가 아닐시 공백으로 전환해줌
+    let hiddenPhone =  phone.replace('-', '');
+    $('#phoneNo').val(hiddenPhone);
+
+    document.signInForm.submit();
+
+
+
 
 }
 

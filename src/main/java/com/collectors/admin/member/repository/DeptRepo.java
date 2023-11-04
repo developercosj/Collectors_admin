@@ -1,4 +1,4 @@
-package com.collectors.admin.dept.repository;
+package com.collectors.admin.member.repository;
 
 import com.collectors.admin.entity.AdmDeptEntity;
 import com.collectors.admin.jpaRepo.AdmDeptJpaRepo;

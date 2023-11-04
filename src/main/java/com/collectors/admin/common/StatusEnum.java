@@ -11,7 +11,10 @@ public enum StatusEnum {
     EMAILCODE_UNIQUE_FAIL(200, "OK", "이메일이 중복됩니다."),
     BAD_REQUEST(400, "BAD_REQUEST", ""),
     NOT_FOUND(404, "NOT_FOUND", ""),
-    INTERNAL_SERER_ERROR(500, "INTERNAL_SERER_ERROR", "");
+    INTERNAL_SERER_ERROR(500, "INTERNAL_SERER_ERROR", ""),
+    EMAIL_UNIQUE_FAIL(0, "EMAIL_UNIQUE_FAIL", "이메일이 중복됩니다."),
+    EMAIL_CONFIRM_FAIL(0, "EMAIL_CONFIRM_FAIL", "이메일인증이 필요합니다");
+
 
 
     int statusCode;

@@ -23,7 +23,7 @@ public class EmailService {
     }
 
     // 회원가입시 이메일 인증코드 DB 확인
-    public Boolean confirmEmailCode(Map<String, Object> map){
+    public Boolean checkEmailCode(Map<String, Object> map){
 
         EmailPassEntity emailPassEntity = new EmailPassEntity();
         emailPassEntity.setPass(map.get("pass").toString());
@@ -39,6 +39,14 @@ public class EmailService {
         return  false;
     }
 
+    // 이메일 인증 confirm 남기기
+    // confirm : Y, N
+    public void confirmEmailCode(String confirm) {
+        emailRepo.confirmEmailCode();
+
+    }
+
+
     // 회원가입 시 이메일 중복 확인
     public Boolean checkUniqueEmail(Map<String, Object> map){
 
@@ -47,8 +55,23 @@ public class EmailService {
         if (0 < uniqueEmail) {
             //
             return false;
+        } else {
+            return  true;
         }
-        return  true;
     }
+
+    // 이메일 인증 받았는지 확인
+
+
+    // 이메일 인증 받았는지 확인
+    public Boolean checkEmailAuth(String email, String confirm) {
+        Long emailAuth = emailRepo.checkEmailAuth(email, confirm);
+        if (0 < emailAuth) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 
 }

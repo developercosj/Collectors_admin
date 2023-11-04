@@ -34,11 +34,22 @@ public class EmailRepo {
         return result;
     }
 
+    // 인증 확인 confirm N -> Y
+    public void confirmEmailCode() {
+        //emailPassJpaRepo.save();
+
+    }
+
+
     public Long checkUniqueEmail(String email){
         Long result = adminJpaRepo.countByAdmId(email);
         return result;
     }
 
+    public Long checkEmailAuth(String email, String confirm){
+        Long result = emailPassJpaRepo.countByEmailAndConfirm(email, confirm);
+        return result;
+    }
 
 
 

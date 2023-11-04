@@ -55,16 +55,19 @@ public class EmailController {
 
       ResponseMessage message;
       // 이메일 중복체크
-      Boolean checkUniqueEmail =  emailService.checkUniqueEmail(map);
-      if (checkUniqueEmail == false) {
+      if (checkEmailUnique(map) == false) {
           message = new ResponseMessage(StatusEnum.EMAILCODE_UNIQUE_FAIL);
           message.setStatus(StatusEnum.EMAILCODE_UNIQUE_FAIL);
           message.setMessage(StatusEnum.EMAILCODE_UNIQUE_FAIL.getMessage());
           return new ResponseEntity<>(message, HttpStatus.OK);
       }
       // 이메일 코드 일치 체크
-      Boolean checkEmailCode =  emailService.confirmEmailCode(map);
+      Boolean checkEmailCode =  emailService.checkEmailCode(map);
+
+
       if (checkEmailCode == true) {
+          // 이메일 코드 인증 confirm 값 Y 로 변경
+          emailService.confirmEmailCode("Y");
           message = new ResponseMessage(StatusEnum.EMAILCODE_CONFIRM_SUCCESS);
           message.setStatus(StatusEnum.EMAILCODE_CONFIRM_SUCCESS);
           message.setMessage(StatusEnum.EMAILCODE_CONFIRM_SUCCESS.getMessage());
@@ -75,6 +78,12 @@ public class EmailController {
       }
 
       return new ResponseEntity<>(message, HttpStatus.OK);
+    }
+
+
+    // 이메일 유니크 체크
+    public Boolean checkEmailUnique(Map<String, Object> map) {
+        return emailService.checkUniqueEmail(map);
     }
 
 

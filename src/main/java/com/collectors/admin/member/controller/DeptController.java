@@ -1,12 +1,9 @@
-package com.collectors.admin.dept.controller;
+package com.collectors.admin.member.controller;
 
-import com.collectors.admin.common.ResponseMessage;
-import com.collectors.admin.dept.service.DeptService;
+import com.collectors.admin.member.service.DeptService;
 import com.collectors.admin.entity.AdmDeptEntity;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
