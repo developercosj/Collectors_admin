@@ -39,17 +39,17 @@
                         <h2 class="fw-light">Collectors 어드민 회원가입</h2>
                         <form class="pt-3">
                             <div class="form-group">
-
                                 <input type="text" class="form-control form-control-lg" id="emailAddress" placeholder="이메일 : abc@collectors.co.kr">
                                 <div class="mt-3" >
-                                    <input type="button" class="btn btn-warning dropdown-toggle" id="authCodeButton" onclick="emailAddressCheck()" value="인증번호 전송">
-                                    <input type="button" class="btn btn-warning dropdown-toggle"  id="confirmCodeButton" onclick="emailConfirm()" value="인증완료">
+                                    <input type="button" class="btn btn-warning dropdown-toggle" id="authCodeButton" onclick="checkEmailAddress()" value="인증번호 전송">
+                                    <input type="button" class="btn btn-warning dropdown-toggle"  id="confirmCodeButton" onclick="confirmEmail()" value="인증완료">
                                 </div>
 
                             </div>
                             <div class="form-group">
                                 <input type="password" class="form-control form-control-lg"
-                                       id="inputPassword" placeholder="비밀번호">
+                                       id="inputPassword" placeholder="비밀번호" oninput="checkPassword()">
+                                <span id="passInfo"></span>
                             </div>
                             <div class="form-group">
                                 <input type="text" class="form-control form-control-lg"
@@ -70,7 +70,7 @@
                                 </label>
                             </div>
                             <div class="mt-3">
-                                <a class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">회원가입</a>
+                                <a class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" onclick="signIn()">회원가입</a>
                             </div>
 
 
@@ -166,7 +166,7 @@ function emailAuth() {
 }
 
 // 이메일 정규표현식 확인
-function emailAddressCheck() {
+function checkEmailAddress() {
     let regex = new RegExp('[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]+\.[a-zA-Z]{2,3}$');
     let address = $('#emailAddress').val();
     if (address == '') {
@@ -184,7 +184,7 @@ function emailAddressCheck() {
 
 
 // 이메일 인증 인증번호 확인
-function emailConfirm() {
+function confirmEmail() {
     let code = $('#emailCode').val();
     let address = $('#emailAddress').val();
     var data = {"pass" : code,
@@ -217,7 +217,6 @@ function emailConfirm() {
 }
 
 // 휴대폰 번호 - 하이픈 추가
-
 function phoneForm() {
     let phone = $('#inputPhoneNo').val();
     //phone = '01012345678';
@@ -226,6 +225,22 @@ function phoneForm() {
     phone = phone.replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`);
     console.log(phone);
     $('#inputPhoneNo').val(phone);
+}
+
+// 비밀번호 형식 체크
+function checkPassword() {
+
+    let regex = new RegExp(/^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,15}$/);
+    let password = $('#inputPassword').val();
+    let testEmails = regex.test(password);
+    if (testEmails == false) {
+        $('#passInfo').text('8 ~ 15자리의 숫자,영문,특수문자 조합으로 설정해주세요');
+        $('#passInfo').attr("style", "float: left")
+    } else {
+        $('#passInfo').text('사용 가능한 비밀번호 입니다.');
+        $('#passInfo').attr("style", "float: right")
+    }
+
 }
 
 
