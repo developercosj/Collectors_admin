@@ -17,6 +17,12 @@ public class EmailRepo {
 
 
 
+    // email로 EmailPass 객체 찾기
+    public EmailPassEntity findEmailPassByEmail(String email) {
+        EmailPassEntity emailPassEntity = emailPassJpaRepo.findByEmail(email);
+        return emailPassEntity;
+    }
+
     public EmailPassEntity insertEmailPass(EmailPassEntity emailPassEntity){
         // 비밀번호 저장
         EmailPassEntity result = emailPassJpaRepo.save(emailPassEntity);
@@ -24,7 +30,7 @@ public class EmailRepo {
         return result;
     }
 
-    public Long confirmEmailCode(EmailPassEntity emailPassEntity){
+    public Long checkEmailCodeAuth(EmailPassEntity emailPassEntity){
         // 이메일 인증번호 확인
         String pass = emailPassEntity.getPass();
         String email = emailPassEntity.getEmail();
@@ -35,9 +41,8 @@ public class EmailRepo {
     }
 
     // 인증 확인 confirm N -> Y
-    public void confirmEmailCode() {
-        //emailPassJpaRepo.save();
-
+    public void confirmEmailPass(EmailPassEntity emailPassEntity) {
+        emailPassJpaRepo.save(emailPassEntity);
     }
 
 

@@ -8,5 +8,6 @@ public interface EmailPassJpaRepo  extends JpaRepository<EmailPassEntity, Long> 
 
     Long countByPassAndEmail(String pass, String email);
     Long countByEmailAndConfirm(String email, String confirm);
+    EmailPassEntity findByEmail(String email);
 
 }

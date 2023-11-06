@@ -29,7 +29,7 @@ public class EmailService {
         emailPassEntity.setPass(map.get("pass").toString());
         emailPassEntity.setEmail(map.get("email").toString());
 
-        Long countPassL = emailRepo.confirmEmailCode(emailPassEntity);
+        Long countPassL = emailRepo.checkEmailCodeAuth(emailPassEntity);
         //int checkPass = Long.valueOf(Optional.ofNullable(countPassL).orElse(0L)).intValue();
 
         if (1 <= countPassL) {
@@ -39,11 +39,12 @@ public class EmailService {
         return  false;
     }
 
-    // 이메일 인증 confirm 남기기
+    // 이메일 인증 완료시 confirm값 변경
     // confirm : Y, N
-    public void confirmEmailCode(String confirm) {
-        emailRepo.confirmEmailCode();
-
+    public void confirmEmailCode(String email, String confirm) {
+        EmailPassEntity emailPassEntity = emailRepo.findEmailPassByEmail(email);
+        emailPassEntity.setConfirm(confirm);
+        emailRepo.confirmEmailPass(emailPassEntity);
     }
 
 
@@ -59,8 +60,6 @@ public class EmailService {
             return  true;
         }
     }
-
-    // 이메일 인증 받았는지 확인
 
 
     // 이메일 인증 받았는지 확인

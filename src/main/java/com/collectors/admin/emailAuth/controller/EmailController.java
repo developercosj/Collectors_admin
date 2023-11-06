@@ -67,7 +67,7 @@ public class EmailController {
 
       if (checkEmailCode == true) {
           // 이메일 코드 인증 confirm 값 Y 로 변경
-          emailService.confirmEmailCode("Y");
+          emailService.confirmEmailCode(map.get("email").toString(), "Y");
           message = new ResponseMessage(StatusEnum.EMAILCODE_CONFIRM_SUCCESS);
           message.setStatus(StatusEnum.EMAILCODE_CONFIRM_SUCCESS);
           message.setMessage(StatusEnum.EMAILCODE_CONFIRM_SUCCESS.getMessage());
